@@ -101,3 +101,151 @@ Dense-2.5D-Mapping/
 │   ├── X_coordinates.npy
 │   ├── Y_coordinates.npy
 │   ├── Z_coordinates.npy
+│   ├── DBSCAN_labels.npy
+│   └── MSAC_ground_mask.npy
+│
+├── docs/
+│
+├── requirements.txt
+├── .gitignore
+├── LICENSE
+└── README.md
+```
+
+## Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/YOUR-USERNAME/Dense-2.5D-Mapping.git
+```
+
+```bash
+cd Dense-2.5D-Mapping
+```
+
+### 2. Create Virtual Environment
+
+Windows:
+
+```powershell
+python -m venv .venv
+```
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+### 3. Install Dependencies
+
+```bash
+python -m pip install --upgrade pip
+```
+
+```bash
+pip install -r requirements.txt
+```
+
+## Requirements
+
+```text
+opencv-python
+torch
+numpy
+matplotlib
+scikit-learn
+```
+
+## Execution
+
+1. Place your input image inside the `data` directory.
+2. Configure the input image path in `main.py`.
+3. Execute the program.
+
+```bash
+python src/main.py
+```
+
+The generated results will be saved automatically inside the `output` directory.
+
+## Output Results
+
+| Output | Description |
+|---|---|
+| 2.5D Mapping | Final depth visualization with MSAC, DBSCAN, and outlines |
+| Dense Depth Map | Normalized depth representation |
+| Ground Mask | Dominant-plane segmentation |
+| Cluster Map | DBSCAN cluster visualization |
+| Bold Outline | Canny edge visualization |
+| X Coordinates | Horizontal spatial coordinates |
+| Y Coordinates | Vertical spatial coordinates |
+| Z Coordinates | Normalized depth coordinates |
+
+## Algorithm Details
+
+### 1. MiDaS Depth Estimation
+Generates dense relative depth information from a single RGB image.
+
+### 2. XYZ Coordinate Projection
+Projects image pixels into approximate spatial coordinates using simplified camera parameters.
+
+### 3. MSAC Plane Extraction
+Estimates a dominant plane and separates ground candidates from non-ground regions.
+
+### 4. DBSCAN Clustering
+Groups spatially related non-ground points into clusters.
+
+### 5. Canny Edge Detection
+Extracts image edges and enhances them using morphological dilation.
+
+### 6. 2.5D Visualization
+Combines depth information, ground segmentation, cluster highlighting, and bold red outlines into a final visualization.
+
+## Performance Analysis
+
+The program calculates:
+
+- Outline processing time
+- Depth inference time
+- XYZ projection time
+- MSAC processing time
+- DBSCAN processing time
+- 2.5D map generation time
+- Total estimated processing latency
+- Estimated FPS
+
+## Limitations
+
+- MiDaS generates relative depth rather than calibrated metric depth.
+- XYZ coordinates are approximate and depend on camera assumptions.
+- MSAC plane extraction does not guarantee semantic ground detection.
+- DBSCAN computational cost can increase significantly with dense point clouds.
+- Estimated FPS is based on selected processing stages and may differ from end-to-end FPS.
+- First-time MiDaS model download requires internet access.
+
+## Future Development
+
+- Camera calibration and metric depth integration
+- Efficient point-cloud processing
+- Interactive 3D visualization
+- Real-time camera processing
+- Advanced ground segmentation
+- Optimized clustering algorithms
+- GUI-based image processing interface
+
+## Author
+
+**Dhanvanth A**
+
+Electronics and Communication Engineering  
+Computer Vision | Image Processing | AI & Embedded Systems
+
+## License
+
+This project is licensed under the MIT License.
+
+See the [LICENSE](LICENSE) file for details.
+
+---
+
+**Dense Image-Based 2.5D Mapping using MiDaS, MSAC, DBSCAN, and Canny Edge Detection.**
